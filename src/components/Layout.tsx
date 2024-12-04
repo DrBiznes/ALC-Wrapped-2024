@@ -8,7 +8,9 @@ interface LayoutProps {
 function Layout({ children }: LayoutProps) {
   return (
     <div className="layout">
-      <HeaderMarquee />
+      <div style={{ marginTop: '-3rem' }}>
+        <HeaderMarquee />
+      </div>
       <Turntable />
       {children}
     </div>

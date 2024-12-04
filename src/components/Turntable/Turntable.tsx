@@ -32,6 +32,12 @@ const Turntable: React.FC = () => {
           <span className="label-text bottom">ALC</span>
         </motion.div>
         <div className="center-hole" />
+        <div className="tone-arm">
+          <div className="tone-arm-base" />
+          <div className="tone-arm-body">
+            <div className="tone-arm-head" />
+          </div>
+        </div>
       </div>
     </div>
   );

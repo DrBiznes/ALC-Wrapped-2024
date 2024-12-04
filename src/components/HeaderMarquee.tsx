@@ -5,11 +5,10 @@ export default function HeaderMarquee() {
     <Marquee
       style={{
         background: 'transparent',
-        padding: '1rem 0',
+        padding: '0.5rem 0',
         fontSize: '6rem',
         fontWeight: 'bold',
         fontFamily: 'Impact, Hagetaka, sans-serif',
-        marginTop: '-3rem',
       }}
       autoFill={true}
       pauseOnHover={true}
