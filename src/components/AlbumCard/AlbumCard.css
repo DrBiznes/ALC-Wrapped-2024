@@ -118,7 +118,7 @@
 }
 
 .track-list {
-  height: calc(100% - 60px);
+  height: calc(100% - 80px);
   overflow-y: auto;
   margin-top: 1rem;
   padding-right: 0.5rem;
@@ -169,7 +169,7 @@
 }
 
 .leaderboard-list {
-  height: calc(100% - 60px);
+  height: calc(100% - 80px);
   overflow-y: auto;
   margin-top: 1rem;
   padding-right: 0.5rem;
