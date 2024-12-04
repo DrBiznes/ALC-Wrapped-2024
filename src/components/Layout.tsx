@@ -1,5 +1,6 @@
 import HeaderMarquee from './HeaderMarquee';
 import Turntable from './Turntable/Turntable';
+import ScrollToTop from './ScrollToTop/ScrollToTop';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ function Layout({ children }: LayoutProps) {
       </div>
       <Turntable />
       {children}
+      <ScrollToTop />
       <div className="copyright">
         © {currentYear} jamino
       </div>

@@ -1,0 +1,37 @@
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: #8332AC;
+  z-index: 100;
+  padding: 0;
+  outline: none;
+}
+
+.scroll-to-top:hover {
+  background: white;
+}
+
+.scroll-to-top:focus {
+  background: rgba(255, 255, 255, 0.9);
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    bottom: 1rem;
+    left: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+} 
