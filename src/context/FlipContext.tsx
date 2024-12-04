@@ -1,44 +1,36 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useCallback } from 'react';
 
 interface FlipContextType {
-  isFlipped: boolean;
-  isGlobalFlip: boolean;
-  toggleFlip: (isGlobal?: boolean) => void;
+  isGlobalFlipped: boolean;
+  toggleGlobalFlip: () => void;
   individualFlips: { [key: string]: boolean };
-  toggleIndividualFlip: (id: string) => void;
+  setIndividualFlip: (id: string, flipped: boolean) => void;
 }
 
 const FlipContext = createContext<FlipContextType | undefined>(undefined);
 
 export function FlipProvider({ children }: { children: React.ReactNode }) {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [isGlobalFlip, setIsGlobalFlip] = useState(false);
-  const [individualFlips, setIndividualFlips] = useState<{ [key: string]: boolean }>({});
+  const [isGlobalFlipped, setIsGlobalFlipped] = useState(false);
+  const [individualFlips, setIndividualFlips] = useState<Record<string, boolean>>({});
 
-  const toggleFlip = (isGlobal: boolean = false) => {
-    if (isGlobal) {
-      setIsGlobalFlip(true);
-      setIsFlipped(prev => !prev);
-      setIndividualFlips({});
-    } else {
-      setIsGlobalFlip(false);
-    }
-  };
+  const toggleGlobalFlip = useCallback(() => {
+    setIsGlobalFlipped(prev => !prev);
+    setIndividualFlips({});
+  }, []);
 
-  const toggleIndividualFlip = (id: string) => {
+  const setIndividualFlip = useCallback((id: string, flipped: boolean) => {
     setIndividualFlips(prev => ({
       ...prev,
-      [id]: !prev[id]
+      [id]: flipped
     }));
-  };
+  }, []);
 
   return (
     <FlipContext.Provider value={{ 
-      isFlipped, 
-      isGlobalFlip, 
-      toggleFlip, 
+      isGlobalFlipped, 
+      toggleGlobalFlip, 
       individualFlips,
-      toggleIndividualFlip 
+      setIndividualFlip
     }}>
       {children}
     </FlipContext.Provider>

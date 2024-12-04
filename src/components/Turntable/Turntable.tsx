@@ -5,7 +5,7 @@ import { useFlip } from '../../context/FlipContext';
 
 const Turntable: React.FC = () => {
   const [rotation, setRotation] = useState(0);
-  const { toggleFlip } = useFlip();
+  const { toggleGlobalFlip } = useFlip();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -16,7 +16,7 @@ const Turntable: React.FC = () => {
   };
 
   const handleClick = () => {
-    toggleFlip(true);
+    toggleGlobalFlip();
   };
 
   return (

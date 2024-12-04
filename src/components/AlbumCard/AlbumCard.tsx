@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import React from 'react';
 import { AlbumScrobbles } from '../../config/scrobbles';
 import './AlbumCard.css';
 import { useState, useEffect } from 'react';
@@ -105,23 +106,31 @@ const rgbToHsl = (r: number, g: number, b: number): [number, number, number] => 
   return [Math.round(h * 360), s, l];
 };
 
-export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortType, trackData, index }) => {
+export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobbleData, sortType, trackData, index }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [cardColor, setCardColor] = useState<string>('hsl(250, 40%, 90%)');
-  const { isFlipped, isGlobalFlip, individualFlips, toggleIndividualFlip } = useFlip();
+  const { isGlobalFlipped, individualFlips, setIndividualFlip } = useFlip();
 
-  // Only apply stagger delay if it's a global flip
-  const staggerDelay = isGlobalFlip ? index * 0.1 : 0;
+  const albumId = `${album.name}-${album.artist}`;
 
   const handleClick = () => {
-    if (!isDragging && !isGlobalFlip) {
-      toggleIndividualFlip(`${album.name}-${album.artist}`);
+    if (!isDragging) {
+      const currentFlip = individualFlips[albumId] || false;
+      setIndividualFlip(albumId, !currentFlip);
     }
   };
 
+  const isCardFlipped = individualFlips[albumId] ?? isGlobalFlipped;
+
   useEffect(() => {
+    const controller = new AbortController();
     getColorFromImage(album.albumCoverUrl)
-      .then(color => setCardColor(color));
+      .then(color => {
+        if (!controller.signal.aborted) {
+          setCardColor(color);
+        }
+      });
+    return () => controller.abort();
   }, [album.albumCoverUrl]);
 
   const getTotalPlays = () => {
@@ -239,28 +248,29 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
     );
   };
 
+  useEffect(() => {
+    const element = document.documentElement;
+    element.style.setProperty('--hover-transition-duration', '0.2s');
+    element.style.setProperty('--hover-transition-timing', 'cubic-bezier(0.215, 0.61, 0.355, 1)');
+  }, []);
+
   return (
     <motion.div 
       className="album-card-container"
-      initial={{ 
-        opacity: 0,
-        y: 50
-      }}
-      animate={{ 
-        opacity: 1,
-        y: 0
-      }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{
         duration: 0.6,
         delay: index * 0.1,
         ease: [0.215, 0.61, 0.355, 1]
       }}
+      layoutId={`${album.name}-${album.artist}`}
+      layout="position"
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       dragElastic={0.8}
       dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
-      whileDrag={{ scale: 1.05, cursor: 'grabbing' }}
-      whileHover={{ translateY: -8 }}
+      data-dragging={isDragging}
       onDragStart={() => setIsDragging(true)}
       onDragEnd={() => setIsDragging(false)}
       onClick={handleClick}
@@ -269,19 +279,18 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
         className="album-card"
         initial={false}
         animate={{ 
-          rotateY: isGlobalFlip 
-            ? (isFlipped ? 180 : 0)
-            : (individualFlips[`${album.name}-${album.artist}`] ? 180 : 0),
+          rotateY: isCardFlipped ? 180 : 0
         }}
         transition={{ 
-          duration: 0.6,
-          delay: isGlobalFlip ? staggerDelay : 0,
-          transformOrigin: "center"
+          duration: 0.4,
+          type: "tween",
+          ease: "easeInOut"
         }}
         style={{
           '--card-color': cardColor,
           color: 'rgba(0, 0, 0, 0.8)',
-          cursor: isDragging ? 'grabbing' : 'grab'
+          cursor: isDragging ? 'grabbing' : 'grab',
+          willChange: 'transform'
         } as React.CSSProperties}
       >
         {/* Front of card */}
@@ -320,4 +329,4 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
       </motion.div>
     </motion.div>
   );
-};
+});
