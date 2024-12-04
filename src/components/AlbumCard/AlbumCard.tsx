@@ -215,9 +215,25 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
         <div className="card-front">
           <img src={album.albumCoverUrl} alt={`${album.name} cover`} className="album-cover" />
           <div className="album-info">
-            <h2 className="album-name">{album.name}</h2>
+            <div className="album-name-container">
+              {album.name.length > 25 ? (
+                <Marquee gradient={false} speed={20}>
+                  <h2 className="album-name">{album.name}</h2>
+                </Marquee>
+              ) : (
+                <h2 className="album-name">{album.name}</h2>
+              )}
+            </div>
             <h3 className="artist-name">{album.artist}</h3>
-            <p className="sort-info">{getSortTypeText()}</p>
+            <div className="sort-info-container">
+              {getSortTypeText().length > 35 ? (
+                <Marquee gradient={false} speed={20}>
+                  <p className="sort-info">{getSortTypeText()}</p>
+                </Marquee>
+              ) : (
+                <p className="sort-info">{getSortTypeText()}</p>
+              )}
+            </div>
             <div className="stats">
               {getBottomStats()}
             </div>
