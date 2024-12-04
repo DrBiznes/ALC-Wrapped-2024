@@ -274,7 +274,6 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
         bounceDamping: 25
       }}
       whileDrag={{ scale: 1.02 }}
-      whileHover={{ y: -8 }}
       data-dragging={isDragging}
       onDragStart={() => setIsDragging(true)}
       onDragEnd={() => setIsDragging(false)}
