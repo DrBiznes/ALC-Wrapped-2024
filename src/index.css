@@ -73,15 +73,3 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
 }
-
-.top-marquee {
-  background-color: black;
-  color: white;
-  padding: 10px 0;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 24px;
-}
-
-.top-marquee span {
-  margin-right: 20px;
-}
