@@ -268,10 +268,10 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
       layout="position"
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-      dragElastic={0.5}
+      dragElastic={0.1}
       dragTransition={{
-        bounceStiffness: 400,
-        bounceDamping: 25
+        bounceStiffness: 600,
+        bounceDamping: 50
       }}
       whileDrag={{ scale: 1.02 }}
       data-dragging={isDragging}
