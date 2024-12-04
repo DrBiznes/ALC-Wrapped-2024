@@ -58,7 +58,7 @@ export const AlbumGrid = () => {
   return (
     <div className="album-grid-container">
       <div className="sort-controls">
-        <p className="sort-description">Change the order of all the albums we listened to this year</p>
+        <p className="sort-description">Click the record to reveal more info or change the sort order below</p>
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
           <motion.div
             className="sort-select-wrapper"
