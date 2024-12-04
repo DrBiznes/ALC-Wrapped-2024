@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import { albumsData } from '../../config/albums';
 import { scrobbleData } from '../../config/scrobbles';
@@ -8,17 +9,34 @@ import './AlbumGrid.css';
 import { motion } from 'framer-motion';
 
 const sortOptions = [
-  { value: 'reviewDate', label: 'CHRONOLOGICAL ORDER', displayLabel: 'CHRONOLOGICAL ORDER ▼' },
-  { value: 'releaseDate', label: 'ALBUM AGE', displayLabel: 'ALBUM AGE ▼' },
-  { value: 'rating', label: 'HIGHEST RATED', displayLabel: 'HIGHEST RATED ▼' },
-  { value: 'plays', label: 'LEADERBOARD', displayLabel: 'LEADERBOARD ▼' },
-  { value: 'topTrack', label: 'BIGGEST HITS', displayLabel: 'BIGGEST HITS ▼' },
+  { value: 'reviewDate', label: 'CHRONOLOGICAL ORDER', displayLabel: 'CHRONOLOGICAL ORDER ▼', path: '/' },
+  { value: 'releaseDate', label: 'ALBUM AGE', displayLabel: 'ALBUM AGE ▼', path: '/album-age' },
+  { value: 'rating', label: 'HIGHEST RATED', displayLabel: 'HIGHEST RATED ▼', path: '/highest-rated' },
+  { value: 'plays', label: 'LEADERBOARD', displayLabel: 'LEADERBOARD ▼', path: '/leaderboard' },
+  { value: 'topTrack', label: 'BIGGEST HITS', displayLabel: 'BIGGEST HITS ▼', path: '/biggest-hits' },
 ];
 
-export const AlbumGrid = () => {
-  const [sortType, setSortType] = useState('reviewDate');
+interface AlbumGridProps {
+  defaultSort?: string;
+}
+
+export const AlbumGrid = ({ defaultSort = 'reviewDate' }: AlbumGridProps) => {
+  const [sortType, setSortType] = useState(defaultSort);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setSortType(defaultSort);
+  }, [defaultSort]);
 
   const selectedOption = sortOptions.find(option => option.value === sortType);
+
+  const handleSortChange = (value: string) => {
+    setSortType(value);
+    const option = sortOptions.find(opt => opt.value === value);
+    if (option) {
+      navigate(option.path);
+    }
+  };
 
   const getSortedAlbums = () => {
     return [...albumsData].sort((a, b) => {
@@ -69,7 +87,7 @@ export const AlbumGrid = () => {
           >
             <select 
               value={sortType}
-              onChange={(e) => setSortType(e.target.value)}
+              onChange={(e) => handleSortChange(e.target.value)}
               className="sort-select"
             >
               <option value={selectedOption?.value}>
@@ -87,43 +105,53 @@ export const AlbumGrid = () => {
         </div>
       </div>
       
-      <Flipper
-        flipKey={sortType}
-        className="album-grid"
-        spring={{ stiffness: 280, damping: 24 }}
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1 }
+        }}
+        transition={{ delay: 0.3 }}
       >
-        {getSortedAlbums().map((album, index) => {
-          const albumScrobbles = scrobbleData.find(
-            s => s.album === album.name && s.artist === album.artist
-          );
-          const albumTrackData = trackData.find(
-            t => t.album === album.name && t.artist === album.artist
-          );
-          
-          return (
-            <Flipped
-              key={`${album.name}-${album.artist}`}
-              flipId={`${album.name}-${album.artist}`}
-            >
-              <div className="album-grid-item">
-                <AlbumCard
-                  album={album}
-                  scrobbleData={albumScrobbles || {
-                    artist: album.artist,
-                    album: album.name,
-                    topListener: 'None',
-                    topScrobbles: 0,
-                    userScrobbles: {}
-                  }}
-                  sortType={sortType}
-                  trackData={albumTrackData}
-                  index={index}
-                />
-              </div>
-            </Flipped>
-          );
-        })}
-      </Flipper>
+        <Flipper
+          flipKey={sortType}
+          className="album-grid"
+          spring={{ stiffness: 280, damping: 24 }}
+        >
+          {getSortedAlbums().map((album, index) => {
+            const albumScrobbles = scrobbleData.find(
+              s => s.album === album.name && s.artist === album.artist
+            );
+            const albumTrackData = trackData.find(
+              t => t.album === album.name && t.artist === album.artist
+            );
+            
+            return (
+              <Flipped
+                key={`${album.name}-${album.artist}`}
+                flipId={`${album.name}-${album.artist}`}
+              >
+                <div className="album-grid-item">
+                  <AlbumCard
+                    album={album}
+                    scrobbleData={albumScrobbles || {
+                      artist: album.artist,
+                      album: album.name,
+                      topListener: 'None',
+                      topScrobbles: 0,
+                      userScrobbles: {}
+                    }}
+                    sortType={sortType}
+                    trackData={albumTrackData}
+                    index={index}
+                  />
+                </div>
+              </Flipped>
+            );
+          })}
+        </Flipper>
+      </motion.div>
     </div>
   );
 };

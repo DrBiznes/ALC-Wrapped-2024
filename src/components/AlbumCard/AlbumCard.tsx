@@ -19,6 +19,7 @@ interface AlbumCardProps {
   sortType: string;
   trackData?: TrackScrobbles;
   index: number;
+  animationDelay?: number;
 }
 
 const getColorFromImage = async (imageUrl: string): Promise<string> => {
@@ -241,6 +242,19 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
   return (
     <motion.div 
       className="album-card-container"
+      initial={{ 
+        opacity: 0,
+        y: 50
+      }}
+      animate={{ 
+        opacity: 1,
+        y: 0
+      }}
+      transition={{
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: [0.215, 0.61, 0.355, 1]
+      }}
       drag
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       dragElastic={0.8}

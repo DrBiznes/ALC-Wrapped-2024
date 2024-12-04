@@ -6,6 +6,8 @@ interface LayoutProps {
 }
 
 function Layout({ children }: LayoutProps) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="layout">
       <div style={{ marginTop: '-3rem' }}>
@@ -13,6 +15,9 @@ function Layout({ children }: LayoutProps) {
       </div>
       <Turntable />
       {children}
+      <div className="copyright">
+        © {currentYear} jamino
+      </div>
     </div>
   );
 }
