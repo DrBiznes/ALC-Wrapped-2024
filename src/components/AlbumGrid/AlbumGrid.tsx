@@ -117,7 +117,23 @@ export const AlbumGrid = ({ defaultSort = 'reviewDate' }: AlbumGridProps) => {
         <Flipper
           flipKey={sortType}
           className="album-grid"
-          spring={{ stiffness: 280, damping: 24 }}
+          spring={{
+            stiffness: 150,
+            damping: 30,
+            mass: 1.5,
+            restSpeed: 0.5
+          }}
+          staggerConfig={{
+            default: {
+              reverse: false,
+              speed: 0.8,
+              columnCount: 3
+            }
+          }}
+          decisionData={{
+            location: true,
+            maxColumnDelta: 2
+          }}
         >
           {getSortedAlbums().map((album, index) => {
             const albumScrobbles = scrobbleData.find(
@@ -131,6 +147,11 @@ export const AlbumGrid = ({ defaultSort = 'reviewDate' }: AlbumGridProps) => {
               <Flipped
                 key={`${album.name}-${album.artist}`}
                 flipId={`${album.name}-${album.artist}`}
+                onAppear={(el) => {
+                  el.style.opacity = "0";
+                  setTimeout(() => el.style.opacity = "1", 0);
+                }}
+                stagger="default"
               >
                 <div className="album-grid-item">
                   <AlbumCard
