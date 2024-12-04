@@ -135,10 +135,20 @@ export const trackData: TrackScrobbles[] = [
   {
     "artist": "Geese",
     "album": "3D Country",
-    "mostScrobbledTrack": "3D Country",
-    "totalScrobbles": 613,
+    "mostScrobbledTrack": "Cowboy Nudes",
+    "totalScrobbles": 704,
     "trackScrobbles": {
-      "3D Country": 613
+      "2122": 400,
+      "3D Country": 613,
+      "Cowboy Nudes": 704,
+      "I See Myself": 641,
+      "Undoer": 220,
+      "Crusades": 217,
+      "Gravity Blues": 465,
+      "Mysterious Love": 163,
+      "Domoto": 155,
+      "Tomorrow's Crusades": 154,
+      "St. Elmo": 394
     }
   },
   {

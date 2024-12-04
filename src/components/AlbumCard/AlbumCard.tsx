@@ -3,6 +3,7 @@ import { AlbumScrobbles } from '../../config/scrobbles';
 import './AlbumCard.css';
 import { useState, useEffect } from 'react';
 import { TrackScrobbles } from '../../config/tracks';
+import Marquee from 'react-fast-marquee';
 
 interface AlbumCardProps {
   album: {
@@ -102,6 +103,7 @@ const rgbToHsl = (r: number, g: number, b: number): [number, number, number] => 
 };
 
 export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortType, trackData }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
   const [cardColor, setCardColor] = useState<string>('hsl(250, 40%, 90%)');
 
   useEffect(() => {
@@ -180,26 +182,56 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
   };
 
   return (
-    <motion.div 
-      className="album-card"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      whileHover={{ scale: 1.05 }}
-      style={{
-        '--card-color': cardColor,
-        color: 'rgba(0, 0, 0, 0.8)',
-      } as React.CSSProperties}
-    >
-      <img src={album.albumCoverUrl} alt={`${album.name} cover`} className="album-cover" />
-      <div className="album-info">
-        <h2 className="album-name">{album.name}</h2>
-        <h3 className="artist-name">{album.artist}</h3>
-        <p className="sort-info">{getSortTypeText()}</p>
-        <div className="stats">
-          {getBottomStats()}
+    <div className="album-card-container" onClick={() => setIsFlipped(!isFlipped)}>
+      <motion.div 
+        className="album-card"
+        initial={false}
+        animate={{ 
+          rotateY: isFlipped ? 180 : 0,
+        }}
+        transition={{ 
+          duration: 0.6,
+          transformOrigin: "center"
+        }}
+        style={{
+          '--card-color': cardColor,
+          color: 'rgba(0, 0, 0, 0.8)',
+        } as React.CSSProperties}
+      >
+        {/* Front of card */}
+        <div className="card-front">
+          <img src={album.albumCoverUrl} alt={`${album.name} cover`} className="album-cover" />
+          <div className="album-info">
+            <h2 className="album-name">{album.name}</h2>
+            <h3 className="artist-name">{album.artist}</h3>
+            <p className="sort-info">{getSortTypeText()}</p>
+            <div className="stats">
+              {getBottomStats()}
+            </div>
+          </div>
         </div>
-      </div>
-    </motion.div>
+
+        {/* Back of card */}
+        <div className="card-back">
+          <h3>Track Listing</h3>
+          <div className="track-list">
+            {trackData && Object.entries(trackData.trackScrobbles).map(([track, plays]) => (
+              <div key={track} className="track-item">
+                <div className="track-name-container">
+                  {track.length > 25 ? (
+                    <Marquee gradient={false} speed={20}>
+                      <span className="track-name">{track}</span>
+                    </Marquee>
+                  ) : (
+                    <span className="track-name">{track}</span>
+                  )}
+                </div>
+                <span className="track-plays">{plays} plays</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </div>
   );
 };
