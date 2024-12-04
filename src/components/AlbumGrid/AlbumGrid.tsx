@@ -120,14 +120,11 @@ export const AlbumGrid = ({ defaultSort = 'reviewDate' }: AlbumGridProps) => {
           spring={{
             stiffness: 150,
             damping: 30,
-            mass: 1.5,
-            restSpeed: 0.5
           }}
           staggerConfig={{
             default: {
               reverse: false,
               speed: 0.8,
-              columnCount: 3
             }
           }}
           decisionData={{
