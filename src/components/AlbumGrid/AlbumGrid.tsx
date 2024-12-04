@@ -1,21 +1,24 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Flipper, Flipped } from 'react-flip-toolkit';
 import { albumsData } from '../../config/albums';
 import { scrobbleData } from '../../config/scrobbles';
 import { trackData } from '../../config/tracks';
 import { AlbumCard } from '../AlbumCard/AlbumCard';
 import './AlbumGrid.css';
+import { motion } from 'framer-motion';
 
 const sortOptions = [
-  { value: 'reviewDate', label: 'Review Date' },
-  { value: 'releaseDate', label: 'Release Date' },
-  { value: 'rating', label: 'Rating' },
-  { value: 'plays', label: 'Total Plays' },
-  { value: 'topTrack', label: 'Most Played Track' },
+  { value: 'reviewDate', label: 'CHRONOLOGICAL ORDER', displayLabel: 'CHRONOLOGICAL ORDER ▼' },
+  { value: 'releaseDate', label: 'ALBUM AGE', displayLabel: 'ALBUM AGE ▼' },
+  { value: 'rating', label: 'HIGHEST RATED', displayLabel: 'HIGHEST RATED ▼' },
+  { value: 'plays', label: 'LEADERBOARD', displayLabel: 'LEADERBOARD ▼' },
+  { value: 'topTrack', label: 'BIGGEST HITS', displayLabel: 'BIGGEST HITS ▼' },
 ];
 
 export const AlbumGrid = () => {
   const [sortType, setSortType] = useState('reviewDate');
+
+  const selectedOption = sortOptions.find(option => option.value === sortType);
 
   const getSortedAlbums = () => {
     return [...albumsData].sort((a, b) => {
@@ -55,43 +58,54 @@ export const AlbumGrid = () => {
   return (
     <div className="album-grid-container">
       <div className="sort-controls">
-        <select 
-          value={sortType}
-          onChange={(e) => setSortType(e.target.value)}
-          className="sort-select"
-        >
-          {sortOptions.map(option => (
-            <option key={option.value} value={option.value}>
-              Sort by {option.label}
-            </option>
-          ))}
-        </select>
+        <p className="sort-description">Change the order of all the albums we listened to this year</p>
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <motion.div
+            className="sort-select-wrapper"
+            initial={{ width: 'auto' }}
+            animate={{ width: 'auto' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            layout
+          >
+            <select 
+              value={sortType}
+              onChange={(e) => setSortType(e.target.value)}
+              className="sort-select"
+            >
+              <option value={selectedOption?.value}>
+                {selectedOption?.displayLabel}
+              </option>
+              {sortOptions
+                .filter(option => option.value !== sortType)
+                .map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+              ))}
+            </select>
+          </motion.div>
+        </div>
       </div>
       
-      <motion.div 
+      <Flipper
+        flipKey={sortType}
         className="album-grid"
-        layout
+        spring={{ stiffness: 280, damping: 24 }}
       >
-        <AnimatePresence mode="popLayout">
-          {getSortedAlbums().map((album, index) => {
-            const albumScrobbles = scrobbleData.find(
-              s => s.album === album.name && s.artist === album.artist
-            );
-            const albumTrackData = trackData.find(
-              t => t.album === album.name && t.artist === album.artist
-            );
-            
-            return (
-              <motion.div
-                key={`${album.name}-${album.artist}`}
-                layout
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.3 }}
-                style={{ position: 'relative', zIndex: 0 }}
-                whileHover={{ zIndex: 1 }}
-              >
+        {getSortedAlbums().map((album) => {
+          const albumScrobbles = scrobbleData.find(
+            s => s.album === album.name && s.artist === album.artist
+          );
+          const albumTrackData = trackData.find(
+            t => t.album === album.name && t.artist === album.artist
+          );
+          
+          return (
+            <Flipped
+              key={`${album.name}-${album.artist}`}
+              flipId={`${album.name}-${album.artist}`}
+            >
+              <div className="album-grid-item">
                 <AlbumCard
                   album={album}
                   scrobbleData={albumScrobbles || {
@@ -104,11 +118,11 @@ export const AlbumGrid = () => {
                   sortType={sortType}
                   trackData={albumTrackData}
                 />
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </motion.div>
+              </div>
+            </Flipped>
+          );
+        })}
+      </Flipper>
     </div>
   );
 };

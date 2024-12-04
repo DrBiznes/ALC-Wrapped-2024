@@ -182,6 +182,51 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
     }
   };
 
+  const renderCardBack = () => {
+    if (sortType === 'plays') {
+      return (
+        <>
+          <h3>Listener Leaderboard</h3>
+          <div className="leaderboard-list">
+            {Object.entries(scrobbleData.userScrobbles)
+              .sort(([, a], [, b]) => b - a)
+              .map(([user, plays], index) => (
+                <div key={user} className="leaderboard-item">
+                  <div className="leaderboard-rank-name">
+                    <span className="rank">#{index + 1}</span>
+                    <span className="user-name">{user}</span>
+                  </div>
+                  <span className="user-plays">{plays} plays</span>
+                </div>
+              ))}
+          </div>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <h3>Track Listing</h3>
+        <div className="track-list">
+          {trackData && Object.entries(trackData.trackScrobbles).map(([track, plays]) => (
+            <div key={track} className="track-item">
+              <div className="track-name-container">
+                {track.length > 25 ? (
+                  <Marquee gradient={false} speed={20}>
+                    <span className="track-name">{track}</span>
+                  </Marquee>
+                ) : (
+                  <span className="track-name">{track}</span>
+                )}
+              </div>
+              <span className="track-plays">{plays} plays</span>
+            </div>
+          ))}
+        </div>
+      </>
+    );
+  };
+
   return (
     <motion.div 
       className="album-card-container"
@@ -190,10 +235,18 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
       dragElastic={0.8}
       dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
       whileDrag={{ scale: 1.05, cursor: 'grabbing' }}
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ translateY: -8 }}
       onDragStart={() => setIsDragging(true)}
       onDragEnd={() => setIsDragging(false)}
       onClick={() => !isDragging && setIsFlipped(!isFlipped)}
+      layout
+      transition={{
+        type: "tween",
+        duration: 0.3
+      }}
+      style={{
+        transformOrigin: "center center"
+      }}
     >
       <motion.div 
         className="album-card"
@@ -242,23 +295,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
 
         {/* Back of card */}
         <div className="card-back">
-          <h3>Track Listing</h3>
-          <div className="track-list">
-            {trackData && Object.entries(trackData.trackScrobbles).map(([track, plays]) => (
-              <div key={track} className="track-item">
-                <div className="track-name-container">
-                  {track.length > 25 ? (
-                    <Marquee gradient={false} speed={20}>
-                      <span className="track-name">{track}</span>
-                    </Marquee>
-                  ) : (
-                    <span className="track-name">{track}</span>
-                  )}
-                </div>
-                <span className="track-plays">{plays} plays</span>
-              </div>
-            ))}
-          </div>
+          {renderCardBack()}
         </div>
       </motion.div>
     </motion.div>

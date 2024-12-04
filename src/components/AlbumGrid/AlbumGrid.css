@@ -3,18 +3,79 @@
 }
 
 .sort-controls {
-  margin-bottom: 2rem;
+  margin: 3rem 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sort-description {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.sort-select-wrapper {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Remove the pseudo-element arrow */
+.sort-select-wrapper::after {
+  display: none;
 }
 
 .sort-select {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  padding: 0.8rem 1rem;
+  font-size: 1.4rem;
+  font-family: 'IMPACT', sans-serif;
+  text-transform: uppercase;
+  background: transparent;
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: none;
   cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: auto;
+  text-align: center;
+}
+
+.sort-select:hover {
+  color: #646cff;
+  transform: scale(1.05);
+}
+
+.sort-select::-ms-expand {
+  display: none;
+}
+
+.sort-select option {
+  background: #242424;
+  font-family: 'IMPACT', sans-serif;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Remove focus outline from select */
+.sort-select:focus {
+  outline: none;
+}
+
+/* Style for Firefox */
+@-moz-document url-prefix() {
+  .sort-select {
+    text-indent: 0;
+    text-overflow: '';
+    padding-right: 1.5rem;
+  }
 }
 
 .album-grid {
@@ -22,4 +83,18 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
   justify-items: center;
+  position: relative;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.album-grid-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
 } 
