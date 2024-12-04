@@ -86,10 +86,6 @@
   max-width: 1200px;
   gap: 5rem 2rem;
   justify-items: center;
-  position: relative;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
   margin: 0 auto;
 }
 
@@ -97,8 +93,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  will-change: transform;
+  transform-style: preserve-3d;
+  perspective: 1000px;
   transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-font-smoothing: subpixel-antialiased;
 } 

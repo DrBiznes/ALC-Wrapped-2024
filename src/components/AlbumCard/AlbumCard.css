@@ -1,20 +1,19 @@
 .album-card-container {
   width: 300px;
   height: 450px;
-  perspective: 1000px;
   margin: 1rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
   touch-action: none;
-  transform: none;
+  transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-font-smoothing: subpixel-antialiased;
   will-change: transform;
   cursor: grab;
   position: relative;
   z-index: 1;
-  transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transform-style: preserve-3d;
 }
 
 .album-card-container[data-dragging="true"] {
@@ -245,5 +244,5 @@
 }
 
 .album-card-container:hover {
-  transform: translateY(-8px);
+  transform: translate3d(0, -8px, 0);
 }
