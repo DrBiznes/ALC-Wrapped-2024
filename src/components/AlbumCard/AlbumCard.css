@@ -7,21 +7,19 @@
   justify-content: center;
   align-items: center;
   touch-action: none;
-  transform: translateZ(0);
+  transform: none;
   backface-visibility: hidden;
   -webkit-font-smoothing: subpixel-antialiased;
-  transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
   will-change: transform;
   cursor: grab;
-}
-
-.album-card-container:not([data-dragging="true"]):hover {
-  transform: translateY(-8px) translateZ(0);
+  position: relative;
+  z-index: 1;
 }
 
 .album-card-container[data-dragging="true"] {
   cursor: grabbing;
-  transform: scale(1.05) translateZ(0);
+  z-index: 2;
+  transition: none;
 }
 
 .album-card {
