@@ -92,7 +92,7 @@ export const AlbumGrid = () => {
         className="album-grid"
         spring={{ stiffness: 280, damping: 24 }}
       >
-        {getSortedAlbums().map((album) => {
+        {getSortedAlbums().map((album, index) => {
           const albumScrobbles = scrobbleData.find(
             s => s.album === album.name && s.artist === album.artist
           );
@@ -117,6 +117,7 @@ export const AlbumGrid = () => {
                   }}
                   sortType={sortType}
                   trackData={albumTrackData}
+                  index={index}
                 />
               </div>
             </Flipped>

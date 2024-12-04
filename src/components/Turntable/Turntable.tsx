@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './Turntable.css';
+import { useFlip } from '../../context/FlipContext';
 
 const Turntable: React.FC = () => {
   const [rotation, setRotation] = useState(0);
+  const { toggleFlip } = useFlip();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -13,9 +15,18 @@ const Turntable: React.FC = () => {
     setRotation(angle * (180 / Math.PI));
   };
 
+  const handleClick = () => {
+    toggleFlip(true);
+  };
+
   return (
     <div className="turntable-container">
-      <div className="record-wrapper" onMouseMove={handleMouseMove}>
+      <div 
+        className="record-wrapper" 
+        onMouseMove={handleMouseMove}
+        onClick={handleClick}
+        style={{ cursor: 'pointer' }}
+      >
         <motion.div 
           className="record-grooves"
           animate={{ rotate: rotation }}

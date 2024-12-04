@@ -4,6 +4,7 @@ import './AlbumCard.css';
 import { useState, useEffect } from 'react';
 import { TrackScrobbles } from '../../config/tracks';
 import Marquee from 'react-fast-marquee';
+import { useFlip } from '../../context/FlipContext';
 
 interface AlbumCardProps {
   album: {
@@ -17,6 +18,7 @@ interface AlbumCardProps {
   scrobbleData: AlbumScrobbles;
   sortType: string;
   trackData?: TrackScrobbles;
+  index: number;
 }
 
 const getColorFromImage = async (imageUrl: string): Promise<string> => {
@@ -102,10 +104,19 @@ const rgbToHsl = (r: number, g: number, b: number): [number, number, number] => 
   return [Math.round(h * 360), s, l];
 };
 
-export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortType, trackData }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [cardColor, setCardColor] = useState<string>('hsl(250, 40%, 90%)');
+export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortType, trackData, index }) => {
   const [isDragging, setIsDragging] = useState(false);
+  const [cardColor, setCardColor] = useState<string>('hsl(250, 40%, 90%)');
+  const { isFlipped, isGlobalFlip, individualFlips, toggleIndividualFlip } = useFlip();
+
+  // Only apply stagger delay if it's a global flip
+  const staggerDelay = isGlobalFlip ? index * 0.1 : 0;
+
+  const handleClick = () => {
+    if (!isDragging && !isGlobalFlip) {
+      toggleIndividualFlip(`${album.name}-${album.artist}`);
+    }
+  };
 
   useEffect(() => {
     getColorFromImage(album.albumCoverUrl)
@@ -238,24 +249,19 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
       whileHover={{ translateY: -8 }}
       onDragStart={() => setIsDragging(true)}
       onDragEnd={() => setIsDragging(false)}
-      onClick={() => !isDragging && setIsFlipped(!isFlipped)}
-      layout
-      transition={{
-        type: "tween",
-        duration: 0.3
-      }}
-      style={{
-        transformOrigin: "center center"
-      }}
+      onClick={handleClick}
     >
       <motion.div 
         className="album-card"
         initial={false}
         animate={{ 
-          rotateY: isFlipped ? 180 : 0,
+          rotateY: isGlobalFlip 
+            ? (isFlipped ? 180 : 0)
+            : (individualFlips[`${album.name}-${album.artist}`] ? 180 : 0),
         }}
         transition={{ 
           duration: 0.6,
+          delay: isGlobalFlip ? staggerDelay : 0,
           transformOrigin: "center"
         }}
         style={{

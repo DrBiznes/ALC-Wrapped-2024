@@ -80,13 +80,15 @@
 
 .album-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  max-width: 1200px;
+  gap: 5rem 2rem;
   justify-items: center;
   position: relative;
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
+  margin: 0 auto;
 }
 
 .album-grid-item {

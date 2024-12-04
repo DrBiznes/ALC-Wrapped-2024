@@ -116,7 +116,7 @@ export const albumsData = [
       "duration": 0,
       "releaseDate": "2024",
       "reviewDate": "2024-05-08",
-      "alcRating": "7.2"
+      "alcRating": "10"
     },
     {
       "name": "Come Away With ESG",

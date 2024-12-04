@@ -1,12 +1,15 @@
 import Layout from './components/Layout'
 import { AlbumGrid } from './components/AlbumGrid/AlbumGrid'
+import { FlipProvider } from './context/FlipContext'
 import './App.css'
 
 function App() {
   return (
-    <Layout>
-      <AlbumGrid />
-    </Layout>
+    <FlipProvider>
+      <Layout>
+        <AlbumGrid />
+      </Layout>
+    </FlipProvider>
   )
 }
 
