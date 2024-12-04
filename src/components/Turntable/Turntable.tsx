@@ -21,9 +21,17 @@ const Turntable: React.FC = () => {
           animate={{ rotate: rotation }}
           transition={{ type: "tween", duration: 0.1 }}
         />
-        <div className="record-label">
-          <div className="center-hole" />
-        </div>
+        <div className="record-label" />
+        <motion.div
+          className="label-content"
+          animate={{ rotate: rotation }}
+          transition={{ type: "tween", duration: 0.1 }}
+        >
+          <span className="label-text top">I</span>
+          <div className="heart">❤️</div>
+          <span className="label-text bottom">ALC</span>
+        </motion.div>
+        <div className="center-hole" />
       </div>
     </div>
   );

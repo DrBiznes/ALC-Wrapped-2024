@@ -69,7 +69,7 @@ button:focus-visible {
 
 .layout {
   min-height: 100vh;
-  background-color: #B6DEFF;
+  background-color: #1A8FE3;
   display: flex;
   flex-direction: column;
 }
