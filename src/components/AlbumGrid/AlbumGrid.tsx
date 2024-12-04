@@ -9,7 +9,7 @@ const sortOptions = [
   { value: 'reviewDate', label: 'Review Date' },
   { value: 'releaseDate', label: 'Release Date' },
   { value: 'rating', label: 'Rating' },
-  { value: 'topListener', label: 'Top Listener' },
+  { value: 'plays', label: 'Total Plays' },
 ];
 
 export const AlbumGrid = () => {
@@ -17,7 +17,20 @@ export const AlbumGrid = () => {
 
   const getSortedAlbums = () => {
     return [...albumsData].sort((a, b) => {
+      const aScrobbles = scrobbleData.find(s => s.album === a.name && s.artist === a.artist);
+      const bScrobbles = scrobbleData.find(s => s.album === b.name && s.artist === b.artist);
+
+      const getAlbumPlays = (scrobbles: typeof scrobbleData[0] | undefined) => {
+        if (!scrobbles) return 0;
+        return Object.values(scrobbles.userScrobbles).reduce((sum, plays) => sum + plays, 0);
+      };
+
       switch (sortType) {
+        case 'plays': {
+          const aPlays = getAlbumPlays(aScrobbles);
+          const bPlays = getAlbumPlays(bScrobbles);
+          return bPlays - aPlays;
+        }
         case 'releaseDate':
           return parseInt(b.releaseDate) - parseInt(a.releaseDate);
         case 'rating':
@@ -75,4 +88,4 @@ export const AlbumGrid = () => {
       </motion.div>
     </div>
   );
-}; 
+};

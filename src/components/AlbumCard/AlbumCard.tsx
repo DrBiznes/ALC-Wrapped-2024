@@ -16,6 +16,10 @@ interface AlbumCardProps {
 }
 
 export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortType }) => {
+  const getTotalPlays = () => {
+    return Object.values(scrobbleData.userScrobbles).reduce((sum, plays) => sum + plays, 0);
+  };
+
   const getSortTypeText = () => {
     switch (sortType) {
       case 'releaseDate':
@@ -24,8 +28,8 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
         return `Reviewed: ${album.reviewDate}`;
       case 'rating':
         return `Rating: ${album.alcRating}`;
-      case 'topListener':
-        return `Top Listener: ${scrobbleData.topListener}`;
+      case 'plays':
+        return `Total Plays: ${getTotalPlays()}`;
       default:
         return '';
     }
@@ -46,9 +50,9 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
         <p className="sort-info">{getSortTypeText()}</p>
         <div className="stats">
           <span>Rating: {album.alcRating}</span>
-          <span>Plays: {scrobbleData.topScrobbles}</span>
+          <span>Plays: {getTotalPlays()}</span>
         </div>
       </div>
     </motion.div>
   );
-}; 
+};
