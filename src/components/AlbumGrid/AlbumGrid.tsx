@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { albumsData } from '../../config/albums';
 import { scrobbleData } from '../../config/scrobbles';
+import { trackData } from '../../config/tracks';
 import { AlbumCard } from '../AlbumCard/AlbumCard';
 import './AlbumGrid.css';
 
@@ -10,6 +11,7 @@ const sortOptions = [
   { value: 'releaseDate', label: 'Release Date' },
   { value: 'rating', label: 'Rating' },
   { value: 'plays', label: 'Total Plays' },
+  { value: 'topTrack', label: 'Most Played Track' },
 ];
 
 export const AlbumGrid = () => {
@@ -19,6 +21,8 @@ export const AlbumGrid = () => {
     return [...albumsData].sort((a, b) => {
       const aScrobbles = scrobbleData.find(s => s.album === a.name && s.artist === a.artist);
       const bScrobbles = scrobbleData.find(s => s.album === b.name && s.artist === b.artist);
+      const aTrackData = trackData.find(t => t.album === a.name && t.artist === a.artist);
+      const bTrackData = trackData.find(t => t.album === b.name && t.artist === b.artist);
 
       const getAlbumPlays = (scrobbles: typeof scrobbleData[0] | undefined) => {
         if (!scrobbles) return 0;
@@ -37,6 +41,11 @@ export const AlbumGrid = () => {
           return parseFloat(b.alcRating) - parseFloat(a.alcRating);
         case 'reviewDate':
           return new Date(b.reviewDate).getTime() - new Date(a.reviewDate).getTime();
+        case 'topTrack': {
+          const aPlays = aTrackData?.totalScrobbles || 0;
+          const bPlays = bTrackData?.totalScrobbles || 0;
+          return bPlays - aPlays;
+        }
         default:
           return 0;
       }
@@ -68,6 +77,9 @@ export const AlbumGrid = () => {
             const albumScrobbles = scrobbleData.find(
               s => s.album === album.name && s.artist === album.artist
             );
+            const albumTrackData = trackData.find(
+              t => t.album === album.name && t.artist === album.artist
+            );
             
             return (
               <AlbumCard
@@ -81,6 +93,7 @@ export const AlbumGrid = () => {
                   userScrobbles: {}
                 }}
                 sortType={sortType}
+                trackData={albumTrackData}
               />
             );
           })}
