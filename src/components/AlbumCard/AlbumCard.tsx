@@ -105,6 +105,7 @@ const rgbToHsl = (r: number, g: number, b: number): [number, number, number] => 
 export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortType, trackData }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [cardColor, setCardColor] = useState<string>('hsl(250, 40%, 90%)');
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     getColorFromImage(album.albumCoverUrl)
@@ -182,7 +183,18 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
   };
 
   return (
-    <div className="album-card-container" onClick={() => setIsFlipped(!isFlipped)}>
+    <motion.div 
+      className="album-card-container"
+      drag
+      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+      dragElastic={0.8}
+      dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+      whileDrag={{ scale: 1.05, cursor: 'grabbing' }}
+      whileHover={{ scale: 1.02 }}
+      onDragStart={() => setIsDragging(true)}
+      onDragEnd={() => setIsDragging(false)}
+      onClick={() => !isDragging && setIsFlipped(!isFlipped)}
+    >
       <motion.div 
         className="album-card"
         initial={false}
@@ -196,6 +208,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
         style={{
           '--card-color': cardColor,
           color: 'rgba(0, 0, 0, 0.8)',
+          cursor: isDragging ? 'grabbing' : 'grab'
         } as React.CSSProperties}
       >
         {/* Front of card */}
@@ -232,6 +245,6 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album, scrobbleData, sortT
           </div>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };

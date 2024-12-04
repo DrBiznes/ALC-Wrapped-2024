@@ -72,8 +72,8 @@ export const AlbumGrid = () => {
         className="album-grid"
         layout
       >
-        <AnimatePresence>
-          {getSortedAlbums().map(album => {
+        <AnimatePresence mode="popLayout">
+          {getSortedAlbums().map((album, index) => {
             const albumScrobbles = scrobbleData.find(
               s => s.album === album.name && s.artist === album.artist
             );
@@ -82,19 +82,29 @@ export const AlbumGrid = () => {
             );
             
             return (
-              <AlbumCard
+              <motion.div
                 key={`${album.name}-${album.artist}`}
-                album={album}
-                scrobbleData={albumScrobbles || {
-                  artist: album.artist,
-                  album: album.name,
-                  topListener: 'None',
-                  topScrobbles: 0,
-                  userScrobbles: {}
-                }}
-                sortType={sortType}
-                trackData={albumTrackData}
-              />
+                layout
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+                style={{ position: 'relative', zIndex: 0 }}
+                whileHover={{ zIndex: 1 }}
+              >
+                <AlbumCard
+                  album={album}
+                  scrobbleData={albumScrobbles || {
+                    artist: album.artist,
+                    album: album.name,
+                    topListener: 'None',
+                    topScrobbles: 0,
+                    userScrobbles: {}
+                  }}
+                  sortType={sortType}
+                  trackData={albumTrackData}
+                />
+              </motion.div>
             );
           })}
         </AnimatePresence>
