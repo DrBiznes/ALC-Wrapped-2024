@@ -384,3 +384,15 @@
   text-overflow: ellipsis;
   max-width: 200px;
 }
+
+/* Add these styles at the end of your CSS file */
+@media (max-width: 768px) {
+  .album-card-container {
+    transform: none !important;
+    cursor: pointer !important;
+  }
+  
+  .album-card {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+  }
+}

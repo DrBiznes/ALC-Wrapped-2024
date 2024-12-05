@@ -108,9 +108,36 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
   const [isDragging, setIsDragging] = useState(false);
   const [cardColor, setCardColor] = useState<string>('hsl(250, 40%, 90%)');
   const [isFlipping, setIsFlipping] = useState(false);
+  const [isSingleColumn, setIsSingleColumn] = useState(false);
   const { isGlobalFlipped, individualFlips, setIndividualFlip } = useFlip();
 
   const albumId = `${album.name}-${album.artist}`;
+
+  useEffect(() => {
+    const checkLayout = () => {
+      const gridElement = document.querySelector('.album-grid');
+      if (gridElement) {
+        const computedStyle = window.getComputedStyle(gridElement);
+        const gridTemplateColumns = computedStyle.getPropertyValue('grid-template-columns');
+        // If there's only one column in the grid
+        setIsSingleColumn(gridTemplateColumns.split(' ').length === 1);
+      }
+    };
+
+    // Initial check
+    checkLayout();
+
+    // Create resize observer
+    const resizeObserver = new ResizeObserver(checkLayout);
+    const gridElement = document.querySelector('.album-grid');
+    if (gridElement) {
+      resizeObserver.observe(gridElement);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   const handleClick = () => {
     if (!isDragging) {
@@ -277,7 +304,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
       className="album-card-container"
       layoutId={`${album.name}-${album.artist}`}
       layout="position"
-      drag={!isCardFlipped}
+      drag={!isCardFlipped && !isSingleColumn}
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       dragElastic={0.1}
       dragTransition={{
@@ -285,7 +312,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
         bounceDamping: 50
       }}
       whileDrag={{ scale: 1.02 }}
-      whileHover={!isCardFlipped ? { y: -16 } : undefined}
+      whileHover={!isCardFlipped && !isSingleColumn ? { y: -16 } : undefined}
       transition={{
         y: {
           type: "spring",
@@ -297,6 +324,9 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
       onDragStart={() => setIsDragging(true)}
       onDragEnd={() => setIsDragging(false)}
       onClick={handleClick}
+      style={{
+        cursor: isSingleColumn ? 'pointer' : (isDragging ? 'grabbing' : 'grab')
+      }}
     >
       <motion.div 
         className="album-card"
