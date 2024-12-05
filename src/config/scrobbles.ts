@@ -11,7 +11,7 @@ export interface AlbumScrobbles {
 export const scrobbleData: AlbumScrobbles[] = [
 {
   "artist": "Jim Sullivan",
-  "album": "UFO",
+  "album": "U.F.O.",
   "topListener": "bob10234",
   "topScrobbles": 374,
   "userScrobbles": {

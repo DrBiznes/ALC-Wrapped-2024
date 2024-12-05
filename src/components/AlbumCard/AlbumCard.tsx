@@ -283,6 +283,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
           type: "tween",
           ease: "easeInOut"
         }}
+        data-flipped={isCardFlipped}
         style={{
           '--card-color': cardColor,
           color: 'rgba(0, 0, 0, 0.8)',
