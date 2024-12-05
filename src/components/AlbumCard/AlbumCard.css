@@ -291,3 +291,9 @@
   pointer-events: none;
   overflow: hidden;
 }
+
+.no-drag {
+  touch-action: auto;
+  pointer-events: auto;
+  cursor: auto;
+}

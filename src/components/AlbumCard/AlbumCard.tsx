@@ -206,7 +206,11 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
       return (
         <>
           <h3>Listener Leaderboard</h3>
-          <div className="leaderboard-list">
+          <div 
+            className="leaderboard-list no-drag"
+            onPointerDown={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
+          >
             {Object.entries(scrobbleData.userScrobbles)
               .sort(([, a], [, b]) => b - a)
               .map(([user, plays], index) => (
@@ -226,7 +230,11 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
     return (
       <>
         <h3>Track Listing</h3>
-        <div className="track-list">
+        <div 
+          className="track-list no-drag"
+          onPointerDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+        >
           {trackData && Object.entries(trackData.trackScrobbles).map(([track, plays]) => (
             <div key={track} className="track-item">
               <div className="track-name-container">
@@ -257,7 +265,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
       className="album-card-container"
       layoutId={`${album.name}-${album.artist}`}
       layout="position"
-      drag
+      drag={!isCardFlipped}
       dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       dragElastic={0.1}
       dragTransition={{
@@ -265,7 +273,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
         bounceDamping: 50
       }}
       whileDrag={{ scale: 1.02 }}
-      whileHover={{ y: -16 }}
+      whileHover={!isCardFlipped ? { y: -16 } : undefined}
       transition={{
         y: {
           type: "spring",
