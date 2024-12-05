@@ -107,14 +107,17 @@ const rgbToHsl = (r: number, g: number, b: number): [number, number, number] => 
 export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobbleData, sortType, trackData }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [cardColor, setCardColor] = useState<string>('hsl(250, 40%, 90%)');
+  const [isFlipping, setIsFlipping] = useState(false);
   const { isGlobalFlipped, individualFlips, setIndividualFlip } = useFlip();
 
   const albumId = `${album.name}-${album.artist}`;
 
   const handleClick = () => {
     if (!isDragging) {
+      setIsFlipping(true);
       const currentFlip = individualFlips[albumId] || false;
       setIndividualFlip(albumId, !currentFlip);
+      setTimeout(() => setIsFlipping(false), 400);
     }
   };
 
@@ -298,6 +301,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
           ease: "easeInOut"
         }}
         data-flipped={isCardFlipped}
+        data-flipping={isFlipping}
         style={{
           '--card-color': cardColor,
           color: 'rgba(0, 0, 0, 0.8)',
@@ -310,7 +314,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
           <img src={album.albumCoverUrl} alt={`${album.name} cover`} className="album-cover" />
           <div className="album-info">
             <div className="album-name-container">
-              {album.name.length > 25 ? (
+              {!isFlipping && album.name.length > 25 ? (
                 <Marquee gradient={false} speed={20}>
                   <h2 className="album-name">{album.name}</h2>
                 </Marquee>
@@ -320,7 +324,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
             </div>
             <h3 className="artist-name">{album.artist}</h3>
             <div className="sort-info-container">
-              {getSortTypeText().length > 35 ? (
+              {!isFlipping && getSortTypeText().length > 35 ? (
                 <Marquee gradient={false} speed={20}>
                   <p className="sort-info">{getSortTypeText()}</p>
                 </Marquee>

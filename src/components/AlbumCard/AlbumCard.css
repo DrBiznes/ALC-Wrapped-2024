@@ -297,3 +297,29 @@
   pointer-events: auto;
   cursor: auto;
 }
+
+.album-card[data-flipping="true"] .track-name-container Marquee {
+  display: none;
+}
+
+.album-card[data-flipping="true"] .track-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px; /* Adjust as needed */
+}
+
+/* Add these styles to handle text overflow during flipping */
+.album-card[data-flipping="true"] .album-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.album-card[data-flipping="true"] .sort-info {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
