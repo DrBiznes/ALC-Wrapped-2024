@@ -19,8 +19,6 @@ interface AlbumCardProps {
   scrobbleData: AlbumScrobbles;
   sortType: string;
   trackData?: TrackScrobbles;
-  index: number;
-  animationDelay?: number;
 }
 
 const getColorFromImage = async (imageUrl: string): Promise<string> => {
@@ -106,7 +104,7 @@ const rgbToHsl = (r: number, g: number, b: number): [number, number, number] => 
   return [Math.round(h * 360), s, l];
 };
 
-export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobbleData, sortType, trackData, index }) => {
+export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobbleData, sortType, trackData }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [cardColor, setCardColor] = useState<string>('hsl(250, 40%, 90%)');
   const { isGlobalFlipped, individualFlips, setIndividualFlip } = useFlip();

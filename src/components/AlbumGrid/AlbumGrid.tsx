@@ -132,7 +132,7 @@ export const AlbumGrid = ({ defaultSort = 'reviewDate' }: AlbumGridProps) => {
             maxColumnDelta: 2
           }}
         >
-          {getSortedAlbums().map((album, index) => {
+          {getSortedAlbums().map((album) => {
             const albumScrobbles = scrobbleData.find(
               s => s.album === album.name && s.artist === album.artist
             );
@@ -162,7 +162,6 @@ export const AlbumGrid = ({ defaultSort = 'reviewDate' }: AlbumGridProps) => {
                     }}
                     sortType={sortType}
                     trackData={albumTrackData}
-                    index={index}
                   />
                 </div>
               </Flipped>
