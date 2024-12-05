@@ -2,6 +2,13 @@
   width: 100%;
   min-height: 100vh;
   background-color: #0c5285;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+#root::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .logo {

@@ -22,12 +22,18 @@ a:hover {
   color: #535bf2;
 }
 
-body {
+html, body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  display: none; /* Chrome, Safari, Opera */
 }
 
 h1 {
@@ -73,6 +79,13 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.layout::-webkit-scrollbar {
+  display: none;
 }
 
 .copyright {

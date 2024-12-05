@@ -12,7 +12,7 @@ function Layout({ children }: LayoutProps) {
 
   return (
     <div className="layout">
-      <HeadScreensaver />
+      <HeadScreensaver speed={0.5} />
       <div style={{ marginTop: '-3rem' }}>
         <HeaderMarquee />
       </div>
