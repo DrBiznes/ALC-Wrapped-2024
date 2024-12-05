@@ -13,11 +13,11 @@ function App() {
           <Layout>
             <Routes>
               <Route path="/" element={<AlbumGrid defaultSort="reviewDate" />} />
-              <Route path="/leaderboard" element={<AlbumGrid defaultSort="plays" />} />
+              <Route path="/most-played" element={<AlbumGrid defaultSort="plays" />} />
               <Route path="/album-age" element={<AlbumGrid defaultSort="releaseDate" />} />
               <Route path="/highest-rated" element={<AlbumGrid defaultSort="rating" />} />
               <Route path="/biggest-hits" element={<AlbumGrid defaultSort="topTrack" />} />
-              <Route path="/top-listener" element={<AlbumGrid defaultSort="topListener" />} />
+              <Route path="/leaderboard" element={<AlbumGrid defaultSort="topListener" />} />
             </Routes>
           </Layout>
         </FlipProvider>

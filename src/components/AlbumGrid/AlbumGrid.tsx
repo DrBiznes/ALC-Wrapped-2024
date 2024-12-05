@@ -10,11 +10,11 @@ import { motion } from 'framer-motion';
 
 const sortOptions = [
   { value: 'reviewDate', label: 'CHRONOLOGICAL ORDER', displayLabel: 'CHRONOLOGICAL ORDER ▼', path: '/' },
-  { value: 'plays', label: 'MOST PLAYED', displayLabel: 'MOST PLAYED ▼', path: '/leaderboard' },
+  { value: 'plays', label: 'MOST PLAYED', displayLabel: 'MOST PLAYED ▼', path: '/most-played' },
   { value: 'topTrack', label: 'BIGGEST HITS', displayLabel: 'BIGGEST HITS ▼', path: '/biggest-hits' },
   { value: 'rating', label: 'HIGHEST RATED', displayLabel: 'HIGHEST RATED ▼', path: '/highest-rated' },
   { value: 'releaseDate', label: 'ALBUM AGE', displayLabel: 'ALBUM AGE ▼', path: '/album-age' },
-  { value: 'topListener', label: 'LEADERBOARD', displayLabel: 'LEADERBOARD ▼', path: '/top-listener' },
+  { value: 'topListener', label: 'LEADERBOARD', displayLabel: 'LEADERBOARD ▼', path: '/leaderboard' },
 ];
 
 interface AlbumGridProps {
@@ -24,11 +24,11 @@ interface AlbumGridProps {
 // Add a mapping object to handle route-to-sort conversion
 const pathToSortMapping: { [key: string]: string } = {
   '/': 'reviewDate',
-  '/leaderboard': 'plays',
+  '/most-played': 'plays',
   '/biggest-hits': 'topTrack',
   '/highest-rated': 'rating',
   '/album-age': 'releaseDate',
-  '/top-listener': 'topListener'
+  '/leaderboard': 'topListener'
 };
 
 export const AlbumGrid = ({ defaultSort = 'reviewDate' }: AlbumGridProps) => {
