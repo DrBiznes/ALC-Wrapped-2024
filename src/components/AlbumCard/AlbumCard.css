@@ -89,8 +89,15 @@
 
 .album-name,
 .sort-info {
-  display: inline-block;
-  padding-right: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+  min-height: 2.6rem;
+  text-transform: uppercase;
 }
 
 .album-name {
@@ -310,16 +317,13 @@
 }
 
 /* Add these styles to handle text overflow during flipping */
-.album-card[data-flipping="true"] .album-name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
+.album-card[data-flipping="true"] .album-name,
 .album-card[data-flipping="true"] .sort-info {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  line-height: 1.3;
+  min-height: 2.6rem;
+  display: block;
 }

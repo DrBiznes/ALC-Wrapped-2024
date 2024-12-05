@@ -142,7 +142,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
     switch (sortType) {
       case 'topTrack':
         return trackData ? 
-          `Most Played: ${trackData.mostScrobbledTrack} (${trackData.totalScrobbles} plays)` : 
+          `Most Played Track: ${trackData.mostScrobbledTrack} (${trackData.totalScrobbles} plays)` : 
           'No track data';
       case 'releaseDate':
         return `Released: ${album.releaseDate}`;
@@ -243,7 +243,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
               <div className="track-name-container">
                 {track.length > 25 ? (
                   <Marquee gradient={false} speed={20}>
-                    <span className="track-name">{track}</span>
+                    <span className="track-name">{track}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                   </Marquee>
                 ) : (
                   <span className="track-name">{track}</span>
@@ -316,7 +316,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
             <div className="album-name-container">
               {!isFlipping && album.name.length > 25 ? (
                 <Marquee gradient={false} speed={20}>
-                  <h2 className="album-name">{album.name}</h2>
+                  <h2 className="album-name">{album.name}&nbsp;&nbsp;&nbsp;&nbsp;</h2>
                 </Marquee>
               ) : (
                 <h2 className="album-name">{album.name}</h2>
@@ -324,9 +324,9 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
             </div>
             <h3 className="artist-name">{album.artist}</h3>
             <div className="sort-info-container">
-              {!isFlipping && getSortTypeText().length > 35 ? (
+              {!isFlipping && getSortTypeText().length > 25 ? (
                 <Marquee gradient={false} speed={20}>
-                  <p className="sort-info">{getSortTypeText()}</p>
+                  <p className="sort-info">{getSortTypeText()}&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 </Marquee>
               ) : (
                 <p className="sort-info">{getSortTypeText()}</p>
