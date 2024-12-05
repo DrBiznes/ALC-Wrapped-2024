@@ -241,7 +241,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
   };
 
   const renderCardBack = () => {
-    if (sortType === 'plays') {
+    if (sortType === 'plays' || sortType === 'topTrack' || sortType === 'topListener') {
       return (
         <>
           <h3>Listener Leaderboard</h3>

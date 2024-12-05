@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  touch-action: none;
+  touch-action: pan-y;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   backface-visibility: hidden;
@@ -388,6 +388,7 @@
 /* Add these styles at the end of your CSS file */
 @media (max-width: 768px) {
   .album-card-container {
+    touch-action: auto;
     transform: none !important;
     cursor: pointer !important;
   }
