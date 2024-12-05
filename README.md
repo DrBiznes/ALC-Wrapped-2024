@@ -1,6 +1,6 @@
 # Album Listening Club Wrapped
 
-A Spotify Wrapped-style website for the University of Oregon Album Listening Club, built with React 18 and Vite. The project uses Framer Motion and React-Flip-Toolkit for smooth animations, React Router for navigation, and CSS Modules for styling. Data is sourced from the Last.FM API using Python scripts to generate TypeScript data files, providing a complete view of the club's listening history. The site features interactive album cards, dynamic sorting, and animated transitions.
+A Spotify Wrapped-style website for the University of Oregon Album Listening Club, built with React 18 and Vite. The project uses Framer Motion and React-Flip-Toolkit for smooth animations. Data is sourced from the Last.FM API using Python scripts to generate TypeScript data files, providing a complete view of the club's listening history. The site features interactive album cards, dynamic sorting, and animated transitions.
 
 ## Overview
 
