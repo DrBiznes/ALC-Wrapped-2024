@@ -251,11 +251,6 @@
   font-size: 1.5rem;
 }
 
-.album-card-container:hover {
-  transform: translate3d(0, -16px, 0);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
 /* Force hardware acceleration and prevent visibility issues on mobile */
 .album-card {
   -webkit-transform: translate3d(0, 0, 0);
