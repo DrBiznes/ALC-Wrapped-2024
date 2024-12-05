@@ -90,11 +90,7 @@ Common issues and solutions:
    - Verify album names match Last.FM exactly
    - Check for special characters or alternate versions
 
-2. **Rate Limiting**
-   - Scripts include built-in delays to respect Last.FM's API limits
-   - If you get rate limit errors, increase delay values in the scripts
-
-3. **Incomplete Track Data**
+2. **Incomplete Track Data**
    - Some albums (especially new releases) might have multiple versions
    - The scripts attempt to combine data from different versions
    - Check the Last.FM API response for debugging
