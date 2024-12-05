@@ -327,3 +327,24 @@
   min-height: 2.6rem;
   display: block;
 }
+
+.sort-controls {
+  margin: 3rem 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.sort-description {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  font-family: 'IMPACT', sans-serif;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 2;
+}
