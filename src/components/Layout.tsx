@@ -1,6 +1,7 @@
 import HeaderMarquee from './HeaderMarquee';
 import Turntable from './Turntable/Turntable';
 import ScrollToTop from './ScrollToTop/ScrollToTop';
+import HeadScreensaver from './HeadScreensaver/HeadScreensaver';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ function Layout({ children }: LayoutProps) {
 
   return (
     <div className="layout">
+      <HeadScreensaver />
       <div style={{ marginTop: '-3rem' }}>
         <HeaderMarquee />
       </div>

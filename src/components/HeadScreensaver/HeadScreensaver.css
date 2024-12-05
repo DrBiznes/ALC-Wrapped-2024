@@ -1,0 +1,29 @@
+.screensaver-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background-color: #8332AC;
+}
+
+.screensaver-container {
+  width: 100%;
+  height: 100%;
+}
+
+.head-container {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.floating-head {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+} 
