@@ -10,30 +10,44 @@ import { motion } from 'framer-motion';
 
 const sortOptions = [
   { value: 'reviewDate', label: 'CHRONOLOGICAL ORDER', displayLabel: 'CHRONOLOGICAL ORDER ▼', path: '/' },
-  { value: 'releaseDate', label: 'ALBUM AGE', displayLabel: 'ALBUM AGE ▼', path: '/album-age' },
-  { value: 'rating', label: 'HIGHEST RATED', displayLabel: 'HIGHEST RATED ▼', path: '/highest-rated' },
-  { value: 'plays', label: 'LEADERBOARD', displayLabel: 'LEADERBOARD ▼', path: '/leaderboard' },
+  { value: 'plays', label: 'MOST PLAYED', displayLabel: 'MOST PLAYED ▼', path: '/leaderboard' },
   { value: 'topTrack', label: 'BIGGEST HITS', displayLabel: 'BIGGEST HITS ▼', path: '/biggest-hits' },
+  { value: 'rating', label: 'HIGHEST RATED', displayLabel: 'HIGHEST RATED ▼', path: '/highest-rated' },
+  { value: 'releaseDate', label: 'ALBUM AGE', displayLabel: 'ALBUM AGE ▼', path: '/album-age' },
+  { value: 'topListener', label: 'LEADERBOARD', displayLabel: 'LEADERBOARD ▼', path: '/top-listener' },
 ];
 
 interface AlbumGridProps {
   defaultSort?: string;
 }
 
+// Add a mapping object to handle route-to-sort conversion
+const pathToSortMapping: { [key: string]: string } = {
+  '/': 'reviewDate',
+  '/leaderboard': 'plays',
+  '/biggest-hits': 'topTrack',
+  '/highest-rated': 'rating',
+  '/album-age': 'releaseDate',
+  '/top-listener': 'topListener'
+};
+
 export const AlbumGrid = ({ defaultSort = 'reviewDate' }: AlbumGridProps) => {
   const [sortType, setSortType] = useState(defaultSort);
   const navigate = useNavigate();
 
+  // Update useEffect to handle route changes
   useEffect(() => {
-    setSortType(defaultSort);
+    const path = window.location.hash.replace('#', '');
+    const mappedSort = pathToSortMapping[path] || defaultSort;
+    setSortType(mappedSort);
   }, [defaultSort]);
 
   const selectedOption = sortOptions.find(option => option.value === sortType);
 
   const handleSortChange = (value: string) => {
-    setSortType(value);
     const option = sortOptions.find(opt => opt.value === value);
     if (option) {
+      setSortType(value);
       navigate(option.path);
     }
   };
@@ -56,17 +70,22 @@ export const AlbumGrid = ({ defaultSort = 'reviewDate' }: AlbumGridProps) => {
           const bPlays = getAlbumPlays(bScrobbles);
           return bPlays - aPlays;
         }
-        case 'releaseDate':
-          return parseInt(b.releaseDate) - parseInt(a.releaseDate);
-        case 'rating':
-          return parseFloat(b.alcRating) - parseFloat(a.alcRating);
-        case 'reviewDate':
-          return new Date(b.reviewDate).getTime() - new Date(a.reviewDate).getTime();
+        case 'topListener': {
+          const aTopScrobbles = aScrobbles?.topScrobbles || 0;
+          const bTopScrobbles = bScrobbles?.topScrobbles || 0;
+          return bTopScrobbles - aTopScrobbles;
+        }
         case 'topTrack': {
           const aPlays = aTrackData?.totalScrobbles || 0;
           const bPlays = bTrackData?.totalScrobbles || 0;
           return bPlays - aPlays;
         }
+        case 'rating':
+          return parseFloat(b.alcRating) - parseFloat(a.alcRating);
+        case 'releaseDate':
+          return parseInt(b.releaseDate) - parseInt(a.releaseDate);
+        case 'reviewDate':
+          return new Date(b.reviewDate).getTime() - new Date(a.reviewDate).getTime();
         default:
           return 0;
       }

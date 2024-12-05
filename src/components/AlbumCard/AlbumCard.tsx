@@ -140,18 +140,20 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
 
   const getSortTypeText = () => {
     switch (sortType) {
+      case 'plays':
+        return `Plays: ${getTotalPlays()}`;
       case 'topTrack':
         return trackData ? 
           `Most Played Track: ${trackData.mostScrobbledTrack} (${trackData.totalScrobbles} plays)` : 
           'No track data';
+      case 'topListener':
+        return `${scrobbleData.topListener}: ${scrobbleData.topScrobbles} plays`;
       case 'releaseDate':
         return `Released: ${album.releaseDate}`;
       case 'reviewDate':
         return `Reviewed: ${album.reviewDate}`;
       case 'rating':
         return `Rating: ${album.alcRating}`;
-      case 'plays':
-        return `Total Plays: ${getTotalPlays()}`;
       default:
         return '';
     }
@@ -159,17 +161,24 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
 
   const getBottomStats = () => {
     switch (sortType) {
-      case 'topTrack':
-        return (
-          <>
-            <span>Released: {album.releaseDate}</span>
-            <span>Rating: {album.alcRating}</span>
-          </>
-        );
       case 'plays':
         return (
           <>
+            <span>Rating: {album.alcRating}</span>
             <span>Released: {album.releaseDate}</span>
+          </>
+        );
+      case 'topTrack':
+        return (
+          <>
+            <span>Rating: {album.alcRating}</span>
+            <span>Released: {album.releaseDate}</span>
+          </>
+        );
+      case 'topListener':
+        return (
+          <>
+            <span>Total Plays: {getTotalPlays()}</span>
             <span>Rating: {album.alcRating}</span>
           </>
         );
