@@ -171,7 +171,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
       case 'topTrack':
         return (
           <>
-            <span>Rating: {album.alcRating}</span>
+            <span>By: {scrobbleData.topListener}</span>
             <span>Released: {album.releaseDate}</span>
           </>
         );
@@ -214,7 +214,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
   };
 
   const renderCardBack = () => {
-    if (sortType === 'plays' || sortType === 'topListener') {
+    if (sortType === 'plays') {
       return (
         <>
           <h3>Listener Leaderboard</h3>
@@ -250,7 +250,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
           {trackData && Object.entries(trackData.trackScrobbles).map(([track, plays]) => (
             <div key={track} className="track-item">
               <div className="track-name-container">
-                {track.length > 25 ? (
+                {isCardFlipped && track.length > 25 ? (
                   <Marquee gradient={false} speed={20}>
                     <span className="track-name">{track}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                   </Marquee>
