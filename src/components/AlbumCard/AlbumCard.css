@@ -144,25 +144,34 @@
   text-transform: uppercase;
 }
 
-.track-list {
+.track-list,
+.leaderboard-list {
   height: calc(100% - 80px);
-  overflow-y: auto;
+  overflow-y: scroll;
   margin-top: 1rem;
   padding-right: 0.5rem;
+  scrollbar-gutter: stable;
+  box-sizing: content-box;
+  width: calc(100% - 0.5rem);
 }
 
-.track-item {
+.track-item,
+.leaderboard-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 2.5rem;
+  box-sizing: border-box;
 }
 
 .track-name-container {
   flex: 1;
   margin-right: 1rem;
   overflow: hidden;
+  min-width: 0;
 }
 
 .track-name {
@@ -170,28 +179,40 @@
   padding-right: 1rem;
   font-family: 'IMPACT', sans-serif;
   text-transform: uppercase;
+  font-size: 1rem;
+  line-height: 1.2;
+  display: block;
 }
 
 .track-plays {
   white-space: nowrap;
   opacity: 0.7;
+  font-size: 1rem;
+  line-height: 1.2;
 }
 
-.track-list::-webkit-scrollbar {
+.track-list::-webkit-scrollbar,
+.leaderboard-list::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
-.track-list::-webkit-scrollbar-track {
+.track-list::-webkit-scrollbar-track,
+.leaderboard-list::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 3px;
+  margin: 4px 0;
 }
 
-.track-list::-webkit-scrollbar-thumb {
+.track-list::-webkit-scrollbar-thumb,
+.leaderboard-list::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 3px;
+  min-height: 40px;
 }
 
-.track-list::-webkit-scrollbar-thumb:hover {
+.track-list::-webkit-scrollbar-thumb:hover,
+.leaderboard-list::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.3);
 }
 
@@ -215,23 +236,31 @@
   align-items: center;
   gap: 1rem;
   flex: 1;
+  min-width: 0;
 }
 
 .rank {
   font-weight: bold;
   opacity: 0.7;
   min-width: 2rem;
+  font-size: 1rem;
+  line-height: 1.2;
 }
 
 .user-name {
   font-weight: 500;
   font-family: 'IMPACT', sans-serif;
   text-transform: uppercase;
+  font-size: 1rem;
+  line-height: 1.2;
+  display: block;
 }
 
 .user-plays {
   white-space: nowrap;
   opacity: 0.7;
+  font-size: 1rem;
+  line-height: 1.2;
 }
 
 .leaderboard-list::-webkit-scrollbar {
