@@ -2,6 +2,15 @@
 
 export const albumsData = [
     {
+      "name": "Nunsexmonkrock",
+      "artist": "Nina Hagen",
+      "albumCoverUrl": "https://lastfm.freetls.fastly.net/i/u/300x300/221bf4f8c5e0736543b85176a6f01fcc.jpg",
+      "duration": 997000,
+      "releaseDate": "1982",
+      "reviewDate": "2024-12-04",
+      "alcRating": "5"
+    },
+    {
       "name": "U.F.O.",
       "artist": "Jim Sullivan",
       "albumCoverUrl": "https://lastfm.freetls.fastly.net/i/u/300x300/7976a82a91e0ddbeae1070f5fb97b159.jpg",

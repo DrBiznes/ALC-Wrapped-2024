@@ -82,9 +82,9 @@ export const scrobbleData: AlbumScrobbles[] = [
   "artist": "underscores",
   "album": "Wallsocket",
   "topListener": "fergo555",
-  "topScrobbles": 849,
+  "topScrobbles": 852,
   "userScrobbles": {
-    "fergo555": 849,
+    "fergo555": 852,
     "Flamboh": 334,
     "lucyacheson": 96,
     "apppapapapiss": 46,
@@ -92,7 +92,8 @@ export const scrobbleData: AlbumScrobbles[] = [
     "jontomdotcom": 13,
     "McBungus": 12,
     "alauerbach03": 3,
-    "wap_king": 2
+    "wap_king": 2,
+    "Scroetm": 1
   }
 },
 {
@@ -129,7 +130,8 @@ export const scrobbleData: AlbumScrobbles[] = [
     "lucyacheson": 13,
     "McBungus": 11,
     "fergo555": 9,
-    "liverbagg": 8
+    "liverbagg": 8,
+    "Scroetm": 1
   }
 },
 {
@@ -148,7 +150,8 @@ export const scrobbleData: AlbumScrobbles[] = [
     "Flamboh": 22,
     "Arisenstring956": 19,
     "apppapapapiss": 12,
-    "Drbiznes": 5
+    "Drbiznes": 5,
+    "Scroetm": 3
   }
 },
 {
@@ -165,7 +168,8 @@ export const scrobbleData: AlbumScrobbles[] = [
     "alauerbach03": 11,
     "Flamboh": 10,
     "Drbiznes": 4,
-    "CaptainOnion13": 1
+    "CaptainOnion13": 1,
+    "Scroetm": 3
   }
 },
 {
@@ -240,7 +244,8 @@ export const scrobbleData: AlbumScrobbles[] = [
     "fergo555": 4,
     "Flamboh": 4,
     "wap_king": 1,
-    "liverbagg": 1
+    "liverbagg": 1,
+    "Scroetm": 1
   }
 },
 {
@@ -299,7 +304,8 @@ export const scrobbleData: AlbumScrobbles[] = [
     "fergo555": 14,
     "Drbiznes": 13,
     "alauerbach03": 9,
-    "Flamboh": 7
+    "Flamboh": 7,
+    "Scroetm": 1
   }
 },
 {
@@ -406,6 +412,23 @@ export const scrobbleData: AlbumScrobbles[] = [
     "Flamboh": 7,
     "alauerbach03": 5,
     "Drbiznes": 1
+  }
+},
+{
+  "artist": "Nina Hagen",
+  "album": "Nunsexmonkrock",
+  "topListener": "apppapapapiss",
+  "topScrobbles": 27,
+  "userScrobbles": {
+    "apppapapapiss": 27,
+    "jontomdotcom": 24,
+    "Flamboh": 21,
+    "McBungus": 16,
+    "lucyacheson": 14,
+    "CaptainOnion13": 10,
+    "fergo555": 6,
+    "bob10234": 6,
+    "alauerbach03": 5
   }
 }
 ];

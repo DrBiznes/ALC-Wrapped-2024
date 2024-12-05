@@ -43,10 +43,10 @@ export const trackData: TrackScrobbles[] = [
     "artist": "Rage Against the Machine",
     "album": "Rage Against the Machine",
     "mostScrobbledTrack": "Killing in the Name",
-    "totalScrobbles": 257,
+    "totalScrobbles": 261,
     "trackScrobbles": {
       "Bombtrack": 113,
-      "Killing in the Name": 257,
+      "Killing in the Name": 261,
       "Take the Power Back": 91,
       "Settle for Nothing": 52,
       "Bullet in the Head": 40,
@@ -61,27 +61,27 @@ export const trackData: TrackScrobbles[] = [
     "artist": "Slint",
     "album": "Spiderland (Remastered)",
     "mostScrobbledTrack": "Breadcrumb Trail",
-    "totalScrobbles": 341,
+    "totalScrobbles": 344,
     "trackScrobbles": {
-      "Breadcrumb Trail": 341,
-      "Nosferatu Man": 282,
-      "Don, Aman": 201,
-      "Washer": 259,
+      "Breadcrumb Trail": 344,
+      "Nosferatu Man": 284,
+      "Don, Aman": 203,
+      "Washer": 261,
       "For Dinner...": 0,
-      "Good Morning, Captain": 255
+      "Good Morning, Captain": 257
     }
   },
   {
     "artist": "underscores",
     "album": "Wallsocket",
     "mostScrobbledTrack": "Cops and robbers",
-    "totalScrobbles": 239,
+    "totalScrobbles": 241,
     "trackScrobbles": {
-      "Cops and robbers": 239,
+      "Cops and robbers": 241,
       "Locals (Girls like us)": 0,
       "You don't even know who I am": 54,
       "Duhhhhhhhhhhhhhhhhh": 71,
-      "Johnny johnny johnny": 188,
+      "Johnny johnny johnny": 189,
       "Shoot to kill, kill your darlings": 51,
       "Horror movie soundtrack": 30,
       "Old money bitch": 179,
@@ -89,7 +89,7 @@ export const trackData: TrackScrobbles[] = [
       "Seventyseven dog years": 54,
       "Uncanny long arms": 0,
       "Good luck final girl": 31,
-      "My guy (Corporate shuffle)": 60,
+      "My guy (Corporate shuffle)": 61,
       "Northwest Zombie Girl": 38,
       "CCTV": 9,
       "Stupid (Can't run from the urge)": 0
@@ -114,10 +114,10 @@ export const trackData: TrackScrobbles[] = [
     "artist": "Erykah Badu",
     "album": "Mama's Gun",
     "mostScrobbledTrack": "Didn't Cha Know",
-    "totalScrobbles": 127,
+    "totalScrobbles": 128,
     "trackScrobbles": {
       "Penitentiary Philosophy": 16,
-      "Didn't Cha Know": 127,
+      "Didn't Cha Know": 128,
       "My Life": 69,
       "...& On": 77,
       "Cleva": 29,
@@ -136,19 +136,19 @@ export const trackData: TrackScrobbles[] = [
     "artist": "Geese",
     "album": "3D Country",
     "mostScrobbledTrack": "Cowboy Nudes",
-    "totalScrobbles": 704,
+    "totalScrobbles": 709,
     "trackScrobbles": {
-      "2122": 400,
+      "2122": 403,
       "3D Country": 613,
-      "Cowboy Nudes": 704,
-      "I See Myself": 641,
+      "Cowboy Nudes": 709,
+      "I See Myself": 642,
       "Undoer": 220,
-      "Crusades": 217,
-      "Gravity Blues": 465,
+      "Crusades": 219,
+      "Gravity Blues": 466,
       "Mysterious Love": 163,
       "Domoto": 155,
-      "Tomorrow's Crusades": 154,
-      "St. Elmo": 394
+      "Tomorrow's Crusades": 155,
+      "St. Elmo": 395
     }
   },
   {
@@ -162,12 +162,12 @@ export const trackData: TrackScrobbles[] = [
       "Fetch the Bolt Cutters": 63,
       "Under the Table": 77,
       "Relay": 37,
-      "Rack of His": 28,
+      "Rack of His": 29,
       "Newspaper": 19,
       "Ladies": 69,
       "Heavy Balloon": 18,
       "Cosmonauts": 22,
-      "For Her": 41,
+      "For Her": 43,
       "Drumset": 11,
       "On I Go": 10
     }
@@ -213,15 +213,15 @@ export const trackData: TrackScrobbles[] = [
     "trackScrobbles": {
       "The Hollow": 6,
       "Magdalena": 3,
-      "Rose": 2,
+      "Rose": 3,
       "Judith": 5,
       "Orestes": 4,
       "3 Libras": 3,
       "Sleeping Beauty": 2,
       "Thomas": 2,
-      "Renhold\u00ebr": 4,
+      "Renholdër": 4,
       "Thinking of You": 3,
-      "Bre\u00f1a": 3,
+      "Breña": 3,
       "Over": 2
     }
   },
@@ -248,10 +248,10 @@ export const trackData: TrackScrobbles[] = [
     "artist": "Herbie Hancock",
     "album": "Head Hunters",
     "mostScrobbledTrack": "Watermelon Man",
-    "totalScrobbles": 190,
+    "totalScrobbles": 192,
     "trackScrobbles": {
       "Chameleon": 138,
-      "Watermelon Man": 190,
+      "Watermelon Man": 192,
       "Sly": 22,
       "Vein Melter": 15
     }
@@ -320,7 +320,7 @@ export const trackData: TrackScrobbles[] = [
     "artist": "Aphex Twin",
     "album": "...I Care Because You Do",
     "mostScrobbledTrack": "Alberto Balsalm",
-    "totalScrobbles": 73,
+    "totalScrobbles": 74,
     "trackScrobbles": {
       "Acrid Avid Jam Shred": 31,
       "The Waxen Pith": 23,
@@ -331,7 +331,7 @@ export const trackData: TrackScrobbles[] = [
       "Start as You Mean to Go On": 9,
       "Wet Tip Hen Ax": 9,
       "Mookid": 26,
-      "Alberto Balsalm": 73,
+      "Alberto Balsalm": 74,
       "Cow Cud is a Twin": 18,
       "Next Heap With": 3
     }
@@ -477,6 +477,24 @@ export const trackData: TrackScrobbles[] = [
       "No Past Lives": 7,
       "Earth Death": 6,
       "Inter": 6
+    }
+  },
+  {
+    "artist": "Nina Hagen",
+    "album": "Nunsexmonkrock",
+    "mostScrobbledTrack": "Antiworld",
+    "totalScrobbles": 13,
+    "trackScrobbles": {
+      "Antiworld": 13,
+      "Smack Jack": 11,
+      "Taitschi-Tarot": 0,
+      "Dread Love": 11,
+      "Future Is Now": 9,
+      "Born in Xixax": 9,
+      "Iki Maska": 7,
+      "Dr. Art": 7,
+      "Cosma Shiva": 7,
+      "Ufo": 8
     }
   }
 ];
