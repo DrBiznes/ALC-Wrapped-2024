@@ -45,6 +45,17 @@
   opacity: 0.5;
 }
 
+.footer-legal a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-legal a:hover {
+  color: rgba(255, 255, 255, 1);
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .footer {
     padding: 1.5rem;

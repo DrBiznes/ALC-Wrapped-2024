@@ -33,9 +33,16 @@ const Footer = () => {
         </a>
       </div>
       <div className="footer-legal">
-        <span>© 2024 jamino</span>
+        <span>© 2024 Jamino</span>
         <span className="separator">|</span>
-        <span>MIT License</span>
+        <a 
+          href="https://github.com/DrBiznes/ALC-Wrapped-2024?tab=MIT-1-ov-file" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          aria-label="MIT License"
+        >
+          MIT License
+        </a>
       </div>
     </footer>
   );
