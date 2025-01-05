@@ -147,12 +147,13 @@
 .track-list,
 .leaderboard-list {
   height: calc(100% - 80px);
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-top: 1rem;
   padding-right: 0.5rem;
   scrollbar-gutter: stable;
   box-sizing: content-box;
   width: calc(100% - 0.5rem);
+  pointer-events: auto;
 }
 
 .track-item,
@@ -330,7 +331,7 @@
 
 .no-drag {
   touch-action: auto;
-  pointer-events: auto;
+  pointer-events: auto !important;
   cursor: auto;
 }
 
@@ -396,4 +397,16 @@
   .album-card {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
   }
+}
+
+.album-card[data-flipped="true"] .track-list,
+.album-card[data-flipped="true"] .leaderboard-list {
+  pointer-events: auto;
+  overflow-y: auto;
+}
+
+/* Add these styles to ensure proper scrolling behavior */
+.card-back {
+  pointer-events: auto;
+  overflow: hidden;
 }
