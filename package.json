@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -21,6 +21,7 @@
     "react-fast-marquee": "^1.6.5",
     "react-flip-toolkit": "^7.2.4",
     "react-helmet-async": "^2.0.5",
+    "react-icons": "^5.4.0",
     "react-router-dom": "^7.0.2"
   },
   "devDependencies": {

@@ -4,16 +4,15 @@ import Turntable from './Turntable/Turntable';
 import ScrollToTop from './ScrollToTop/ScrollToTop';
 import HeadScreensaver from './HeadScreensaver/HeadScreensaver';
 import SEO from './SEO';
+import Footer from './Footer/Footer';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 function Layout({ children }: LayoutProps) {
-  const currentYear = new Date().getFullYear();
   const location = useLocation();
   
-  // Get sort type from path
   const getSortTypeFromPath = (path: string): string => {
     switch (path) {
       case '/most-played':
@@ -43,9 +42,7 @@ function Layout({ children }: LayoutProps) {
       <Turntable />
       {children}
       <ScrollToTop />
-      <div className="copyright">
-        © {currentYear} jamino
-      </div>
+      <Footer />
     </div>
   );
 }
