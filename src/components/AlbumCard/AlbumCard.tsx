@@ -110,8 +110,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
   const [isFlipping, setIsFlipping] = useState(false);
   const [isSingleColumn, setIsSingleColumn] = useState(false);
   const { isGlobalFlipped, individualFlips, setIndividualFlip } = useFlip();
-
-  const albumId = `${album.name}-${album.artist}`;
+  const albumId = `${album.artist}-${album.name}`;
 
   useEffect(() => {
     const checkLayout = () => {
@@ -142,8 +141,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
   const handleClick = () => {
     if (!isDragging) {
       setIsFlipping(true);
-      const currentFlip = individualFlips[albumId] || false;
-      setIndividualFlip(albumId, !currentFlip);
+      setIndividualFlip(albumId, !isCardFlipped);
       setTimeout(() => setIsFlipping(false), 400);
     }
   };

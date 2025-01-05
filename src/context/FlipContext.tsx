@@ -15,6 +15,7 @@ export function FlipProvider({ children }: { children: React.ReactNode }) {
 
   const toggleGlobalFlip = useCallback(() => {
     setIsGlobalFlipped(prev => !prev);
+    // Clear individual flips when using global flip
     setIndividualFlips({});
   }, []);
 
