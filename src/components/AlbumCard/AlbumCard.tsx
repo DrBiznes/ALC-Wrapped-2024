@@ -275,7 +275,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = React.memo(({ album, scrobble
           {trackData && Object.entries(trackData.trackScrobbles).map(([track, plays]) => (
             <div key={track} className="track-item">
               <div className="track-name-container">
-                {isCardFlipped && track.length > 24 ? (
+                {isCardFlipped && track.length > 24 && !isFlipping ? (
                   <Marquee gradient={false} speed={20}>
                     <span className="track-name">{track}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                   </Marquee>

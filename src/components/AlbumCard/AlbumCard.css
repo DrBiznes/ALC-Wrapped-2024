@@ -183,7 +183,9 @@
   text-transform: uppercase;
   font-size: 1rem;
   line-height: 1.2;
-  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .track-plays {
@@ -361,4 +363,12 @@
 /* Additional styles removed conflicting overflow on .card-back */
 .card-back {
   pointer-events: auto;
+}
+
+/* Add styles for flipping state */
+.album-card[data-flipping="true"] .track-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: none;
 }
