@@ -7,7 +7,6 @@
   align-items: center;
   touch-action: pan-y;
   transform: translateZ(0);
-  -webkit-transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -webkit-font-smoothing: subpixel-antialiased;
@@ -16,7 +15,6 @@
   position: relative;
   z-index: 1;
   transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
   transition: transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
@@ -43,19 +41,16 @@
 .card-front,
 .card-back {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: 12px;
   padding: 1rem;
-  transform-style: preserve-3d;
-  transform: translateZ(0);
-  will-change: transform;
-  -webkit-transform-style: preserve-3d;
-  -webkit-transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-front {
@@ -70,6 +65,10 @@
 .card-back {
   background: var(--card-color);
   transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+  z-index: 2;
 }
 
 .album-cover {
@@ -146,14 +145,16 @@
 
 .track-list,
 .leaderboard-list {
-  height: calc(100% - 80px);
+  flex: 1 1 auto;
   overflow-y: auto;
   margin-top: 1rem;
   padding-right: 0.5rem;
   scrollbar-gutter: stable;
   box-sizing: content-box;
   width: calc(100% - 0.5rem);
-  pointer-events: auto;
+  transform: translateZ(1px);
+  position: relative;
+  z-index: 3;
 }
 
 .track-item,
@@ -304,8 +305,23 @@
 }
 
 .card-back {
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  padding: 1rem;
+  transform-style: flat;
+  transform: rotateY(180deg) translateZ(1px);
+  -webkit-transform: rotateY(180deg) translateZ(1px);
+  will-change: transform;
+}
+
+/* Override transform-style when flipped */
+.album-card[data-flipped="true"] .card-back {
+  transform-style: flat;
+  -webkit-transform-style: flat;
 }
 
 /* Additional mobile-specific fixes */
@@ -322,81 +338,11 @@
   }
 }
 
-/* Add these styles after the existing .track-list and .leaderboard-list styles */
+/* Conditional Styles */
 .album-card:not([data-flipped="true"]) .track-list,
 .album-card:not([data-flipped="true"]) .leaderboard-list {
   pointer-events: none;
   overflow: hidden;
-}
-
-.no-drag {
-  touch-action: auto;
-  pointer-events: auto !important;
-  cursor: auto;
-}
-
-.album-card[data-flipping="true"] .track-name-container Marquee {
-  display: none;
-}
-
-.album-card[data-flipping="true"] .track-name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 200px; /* Adjust as needed */
-}
-
-/* Add these styles to handle text overflow during flipping */
-.album-card[data-flipping="true"] .album-name,
-.album-card[data-flipping="true"] .sort-info {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  line-height: 1.3;
-  min-height: 2.6rem;
-  display: block;
-}
-
-.sort-controls {
-  margin: 3rem 0;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  position: relative;
-  z-index: 1;
-}
-
-.sort-description {
-  font-size: 1.5rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0;
-  font-family: 'IMPACT', sans-serif;
-  text-transform: uppercase;
-  position: relative;
-  z-index: 2;
-}
-
-.album-card:not([data-flipped="true"]) .track-name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 200px;
-}
-
-/* Add these styles at the end of your CSS file */
-@media (max-width: 768px) {
-  .album-card-container {
-    touch-action: auto;
-    transform: none !important;
-    cursor: pointer !important;
-  }
-  
-  .album-card {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
-  }
 }
 
 .album-card[data-flipped="true"] .track-list,
@@ -405,8 +351,14 @@
   overflow-y: auto;
 }
 
-/* Add these styles to ensure proper scrolling behavior */
+/* No-Drag Class */
+.no-drag {
+  touch-action: auto;
+  pointer-events: auto !important;
+  cursor: auto;
+}
+
+/* Additional styles removed conflicting overflow on .card-back */
 .card-back {
   pointer-events: auto;
-  overflow: hidden;
 }
